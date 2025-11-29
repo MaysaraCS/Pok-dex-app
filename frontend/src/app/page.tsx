@@ -1,4 +1,4 @@
-import Carousel from '@/components/Carousel';
+import TopSection from '@/components/Layout/TopSection';
 
 export default function Home() {
 
@@ -9,23 +9,29 @@ export default function Home() {
     '/images/banners/carousel-3.jpg',
   ];
 
+  // Static banner images - using local images
+  const staticBanner1 = '/images/banners/static-banner-1.jpg';
+  const staticBanner2 = '/images/banners/static-banner-2.jpg';
+
+
+
   return (
     <main className="min-h-screen bg-gray-100">
       <div className="container mx-auto p-4">
-        {/* Top Section - Carousel Banner */}
-        <div className="mb-8">
-          <div className="h-[400px] w-full">
-            <Carousel images={carouselImages} autoRotateInterval={3000} />
-          </div>
-        </div>
+        {/* Top Section - Carousel + Static Banners */}
+        <TopSection
+          carouselImages={carouselImages}
+          staticBanner1={staticBanner1}
+          staticBanner2={staticBanner2}
+        />
 
         {/* Temporary content */}
-        <div className="text-center">
+        <div className="text-center mt-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
             Pokédex App
           </h1>
           <p className="text-gray-600">
-            Carousel is working! More components coming soon...
+            Top section complete! Carousel + Static Banners ✅
           </p>
         </div>
       </div>
