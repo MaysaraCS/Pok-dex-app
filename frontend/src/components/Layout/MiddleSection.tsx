@@ -1,0 +1,1 @@
+// Persistent layout with fixed images

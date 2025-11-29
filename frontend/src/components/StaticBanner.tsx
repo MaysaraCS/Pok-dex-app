@@ -1,0 +1,1 @@
+// Static banner component
