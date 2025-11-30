@@ -1,5 +1,6 @@
 import TopSection from '@/components/Layout/TopSection';
 import MiddleSection from '@/components/Layout/MiddleSection';
+import PokemonList from '@/components/PokemonList';
 
 export default function Home() {
   // carouselImages - batman banners
@@ -36,29 +37,9 @@ export default function Home() {
           leftImage={leftStaticImage}
           rightImage={rightStaticImage}
         >
-          {/* Temporary placeholder content - will be replaced with Pokemon list */}
-          <div className="bg-white rounded-lg p-8 shadow-md">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Search Bar & Pokémon List
-            </h2>
-            <p className="text-gray-600 mb-8">
-              This area will contain the search bar and scrollable Pokémon list.
-            </p>
-
-            {/* Simulated scrollable content to test sticky behavior */}
-            <div className="space-y-4">
-              {[...Array(20)].map((_, i) => (
-                <div
-                  key={i}
-                  className="p-4 bg-gray-100 rounded-lg border border-gray-300"
-                >
-                  <p className="text-gray-700">
-                    Placeholder content item {i + 1} - Scroll down to see the sticky side images stay in place!
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Actual Pokémon list in the persistent middle section */}
+          {/* This list fetches data only from the Laravel API */}
+          <PokemonList />
         </MiddleSection>
       </div>
     </main>
