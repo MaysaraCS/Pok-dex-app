@@ -7,7 +7,7 @@ interface PokemonCardProps {
 
 export default function PokemonCard({ pokemon }: PokemonCardProps) {
   return (
-    <div className="flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+    <div className="flex items-center gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm">
       {/* Sprite image */}
       <div className="relative h-16 w-16 flex-shrink-0">
         {pokemon.image ? (

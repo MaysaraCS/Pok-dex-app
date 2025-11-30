@@ -21,7 +21,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         value={value}
         onChange={handleChange}
         placeholder="Search Pokémon by name..."
-        className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        className="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 placeholder:text-gray-400 focus:border-orange-400 focus:outline-none focus:ring-1 focus:ring-orange-400"
       />
     </div>
   );
