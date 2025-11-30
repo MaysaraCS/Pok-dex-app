@@ -36,4 +36,67 @@ class PokeApiService
 
         return $response->json();
     }
+
+    /**
+     * Fetch a single Pokémon's full detail by its URL.
+     */
+    public function getPokemonByUrl(string $url): array
+    {
+        $response = Http::get($url);
+
+        $response->throw();
+
+        return $response->json();
+    }
+
+    public function getPokemonsWithDetails(int $page = 1, int $limit = 20): array
+    {
+        // Call list API
+        $list = $this->getPokemons($page, $limit);
+        $results = $list['results'] ?? [];
+
+        $detailedResults = [];
+
+        // Loop results
+        foreach ($results as $pokemon) {
+            if (! isset($pokemon['url'])) {
+                continue;
+            }
+
+            $detail = $this->getPokemonByUrl($pokemon['url']);
+
+            // Pick fields from the detail JSON
+            $name = $detail['name'] ?? $pokemon['name'] ?? null;
+
+            // Image: sprites.other["official-artwork"].front_default
+            $image = $detail['sprites']['other']['official-artwork']['front_default']
+                ?? $detail['sprites']['front_default']
+                ?? null;
+
+            // Types: ["grass", "poison", ...]
+            $types = [];
+            foreach ($detail['types'] ?? [] as $typeEntry) {
+                if (isset($typeEntry['type']['name'])) {
+                    $types[] = $typeEntry['type']['name'];
+                }
+            }
+
+            // Push into results array
+            $detailedResults[] = [
+                'name' => $name,
+                'image' => $image,
+                'types' => $types,
+                'height' => $detail['height'] ?? null,
+                'weight' => $detail['weight'] ?? null,
+            ];
+        }
+
+        //Return final structure
+        return [
+            'count' => $list['count'] ?? 0,
+            'next' => $list['next'] ?? null,
+            'previous' => $list['previous'] ?? null,
+            'results' => $detailedResults,
+        ];
+    }
 }

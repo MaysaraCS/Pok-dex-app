@@ -14,23 +14,19 @@ class PokemonController extends Controller
     {
     }
 
-    /**
-     * Handle GET /api/pokemons
-     */
-    public function index(Request $request): JsonResponse
+      //Handle GET /api/pokemons
+      // updated function ->> updated index to use getPokemonsWithDetails
+
+        public function index(Request $request): JsonResponse
     {
         // Read page and limit from the query string.
         $page = (int) $request->query('page', 1);
         $limit = (int) $request->query('limit', 20);
 
-        // Call the service
-        $data = $this->pokeApiService->getPokemons($page, $limit);
+        // Call the service to get list + per-Pokémon details merged
+        $data = $this->pokeApiService->getPokemonsWithDetails($page, $limit);
 
-        return response()->json([
-            'count' => $data['count'] ?? 0,
-            'next' => $data['next'] ?? null,
-            'previous' => $data['previous'] ?? null,
-            'results' => $data['results'] ?? [],
-        ]);
+        // Directly return the transformed structure
+        return response()->json($data);
     }
 }
